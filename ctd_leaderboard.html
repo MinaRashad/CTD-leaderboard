@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTD Skills Arena Leaderboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 3.5em;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            animation: bounce 2s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            animation: wobble 3s ease infinite;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            75% { transform: rotate(-2deg); }
+        }
+
+        .leaderboard {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            animation: slideIn 0.8s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .leader-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .leader-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            transition: left 0.5s;
+        }
+
+        .leader-item:hover::before {
+            left: 100%;
+        }
+
+        .leader-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .rank-1 {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            border: 4px solid #ff6b6b;
+        }
+
+        .rank-2 {
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+            border: 3px solid #4ecdc4;
+        }
+
+        .rank-3 {
+            background: linear-gradient(135deg, #cd7f32, #e8a878);
+            border: 3px solid #45b7d1;
+        }
+
+        .rank-other {
+            background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+            border: 2px solid #95a5a6;
+        }
+
+        .leader-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .rank-badge {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            font-size: 1.2em;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .leader-item:hover .rank-badge {
+            animation: wiggle 0.5s ease;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .leader-score {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c3e50;
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .no-data {
+            text-align: center;
+            font-size: 1.5em;
+            color: #7f8c8d;
+            padding: 40px;
+            animation: fade 2s ease infinite;
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .challenges {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.8s ease 0.3s backwards;
+        }
+
+        .challenge-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .challenge-card::after {
+            content: '⭐';
+            position: absolute;
+            font-size: 5em;
+            opacity: 0.1;
+            right: 20px;
+            bottom: -20px;
+            animation: float 3s ease infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .challenge-card:hover {
+            transform: translateX(10px) rotate(2deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .challenge-card:nth-child(even) {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        .challenge-card:nth-child(odd):not(:first-child) {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+        }
+
+        .challenge-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .challenge-rules {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .challenge-points {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: right;
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .trophy {
+            display: inline-block;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CTD Skills Arena</h1>
+        <p class="subtitle">Rise to the Top! Level Up Your Skills!</p>
+
+        <div class="leaderboard">
+            <h2><span class="trophy">🏆</span> LEADERBOARD</h2>
+            <div id="leaderboard-content"></div>
+        </div>
+
+        <div class="challenges">
+            <h2>This Week's Challenges</h2>
+            <div id="challenges-content"></div>
+            
+            <div style="margin-top: 40px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e); padding: 25px; border-radius: 15px; color: #2d3436;">
+                <h3 style="font-size: 2em; margin-bottom: 15px;">Points System</h3>
+                <p style="font-size: 1.3em; line-height: 1.8;">
+                    Complete challenges to earn points and climb the leaderboard! Each challenge has its own point value. The more challenges you complete, the higher you rank! Keep hustling!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ================================
+        // 📝 UPDATE THIS DATA EASILY! 📝
+        // ================================
+
+        // LEADERBOARD DATA - Just add name and score!
+        const leaderboardData = {
+            // "John Doe": 150,
+            // "Jane Smith": 200,
+            // "Bob Wilson": 175,
+            // "Alice Johnson": 190,
+            // "Charlie Brown": 160
+        };
+
+        // CHALLENGES DATA - Three challenges per week!
+        const challenges = [
+            // {
+            //     name: "Code Master Challenge",
+            //     rules: "Complete 5 coding problems on LeetCode (Easy to Medium difficulty). Submit your solutions and get them reviewed!",
+            //     points: 50
+            // },
+            // {
+            //     name: "Network Ninja",
+            //     rules: "Connect with 10 professionals in your field on LinkedIn. Send personalized messages and have meaningful conversations!",
+            //     points: 30
+            // },
+            // {
+            //     name: "Resume Revamp",
+            //     rules: "Update your resume with your latest projects and skills. Get it reviewed by a mentor or career counselor!",
+            //     points: 40
+            // }
+        ];
+
+        // ================================
+        // 🎨 RENDERING CODE (Don't change unless you want to modify styling) 🎨
+        // ================================
+
+        function renderLeaderboard() {
+            const content = document.getElementById('leaderboard-content');
+            
+            if (Object.keys(leaderboardData).length === 0) {
+                content.innerHTML = '<div class="no-data">No leaders yet! Be the first to earn points!</div>';
+                return;
+            }
+
+            const sorted = Object.entries(leaderboardData).sort((a, b) => b[1] - a[1]);
+            
+            let html = '';
+            sorted.forEach(([name, score], index) => {
+                const rank = index + 1;
+                let rankClass = 'rank-other';
+                let emoji = '👤';
+                
+                if (rank === 1) {
+                    rankClass = 'rank-1';
+                    emoji = '👑';
+                } else if (rank === 2) {
+                    rankClass = 'rank-2';
+                    emoji = '🥈';
+                } else if (rank === 3) {
+                    rankClass = 'rank-3';
+                    emoji = '🥉';
+                }
+                
+                html += `
+                    <div class="leader-item ${rankClass}">
+                        <div class="leader-name">
+                            <span class="rank-badge">${emoji}</span>
+                            <span>#${rank} ${name}</span>
+                        </div>
+                        <div class="leader-score">${score} pts</div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = html;
+        }
+
+        function renderChallenges() {
+            const content = document.getElementById('challenges-content');
+            
+            if (challenges.length === 0) {
+                content.innerHTML = '<div class="no-data">No challenges this week! Check back soon!</div>';
+                return;
+            }
+
+            let html = '';
+            challenges.forEach((challenge, index) => {
+                html += `
+                    <div class="challenge-card">
+                        <div class="challenge-name">Challenge ${index + 1}: ${challenge.name}</div>
+                        <div class="challenge-rules">${challenge.rules}</div>
+                        <div class="challenge-points">💎 ${challenge.points} Points</div>
+                    </div>
+                `;
+            });
+            
+            content.innerHTML = html;
+        }
+
+        // Create floating confetti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#a29bfe', '#fd79a8'];
+            const symbols = ['⭐', '✨', '🎉', '🎊', '💫', '🌟'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 200);
+            }
+        }
+
+        // Initialize
+        renderLeaderboard();
+        renderChallenges();
+    </script>
+</body>
+</html>
