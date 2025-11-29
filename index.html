@@ -260,6 +260,13 @@
             line-height: 1.6;
         }
 
+        .challenge-meta {
+            font-size: 1.05em;
+            margin-top: 8px;
+            opacity: 0.95;
+            color: rgba(255,255,255,0.95);
+        }
+
         .challenge-points {
             font-size: 1.5em;
             font-weight: bold;
@@ -321,21 +328,13 @@
 
         // CHALLENGES DATA - Three challenges per week!
         const challenges = [
-            // {
-            //     name: "Code Master Challenge",
-            //     rules: "Complete 5 coding problems on LeetCode (Easy to Medium difficulty). Submit your solutions and get them reviewed!",
-            //     points: 50
-            // },
-            // {
-            //     name: "Network Ninja",
-            //     rules: "Connect with 10 professionals in your field on LinkedIn. Send personalized messages and have meaningful conversations!",
-            //     points: 30
-            // },
-            // {
-            //     name: "Resume Revamp",
-            //     rules: "Update your resume with your latest projects and skills. Get it reviewed by a mentor or career counselor!",
-            //     points: 40
-            // }
+            {
+                name: "Take a picture at your favourite study spot and put it here <a href='https:\/\/drive.google.com/drive/folders/1eEA5fY4vmvjRp9mKGDsCFkKS31M4IysJ?usp=drive_link'>here</a>",
+                rules: "Take a clear photo at your favourite study spot. Be respectful of privacy and surroundings.",
+                difficulty: "Easy",
+                points: 10,
+                bonus: "5 points for uniqueness and creativity"
+            }
         ];
 
         // ================================
@@ -396,8 +395,9 @@
                 html += `
                     <div class="challenge-card">
                         <div class="challenge-name">Challenge ${index + 1}: ${challenge.name}</div>
-                        <div class="challenge-rules">${challenge.rules}</div>
-                        <div class="challenge-points">💎 ${challenge.points} Points</div>
+                            <div class="challenge-rules">${challenge.rules}</div>
+                            <div class="challenge-meta">Difficulty: ${challenge.difficulty} &nbsp; | &nbsp; Bonus: ${challenge.bonus}</div>
+                            <div class="challenge-points">💎 ${challenge.points} Points</div>
                     </div>
                 `;
             });
