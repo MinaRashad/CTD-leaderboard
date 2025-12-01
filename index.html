@@ -267,6 +267,40 @@
             color: rgba(255,255,255,0.95);
         }
 
+        /* Points system collapsible */
+        .points-system {
+            margin-top: 40px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        }
+
+        .points-header {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 18px 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .points-header h3 { margin: 0; font-size: 1.6em; color: #2d3436; }
+
+        .points-toggle-icon { font-size: 1.4em; color: #2d3436; transition: transform 0.2s ease; }
+
+        .points-content {
+            background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+            color: #2d3436;
+            padding: 18px 22px;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .points-content p { margin-bottom: 12px; }
+
+        .points-prize { font-weight: 700; color: #ff6b6b; }
+
         .challenge-points {
             font-size: 1.5em;
             font-weight: bold;
@@ -291,19 +325,34 @@
 <body>
     <div class="container">
         <h1>CTD Skills Arena</h1>
-        <p class="subtitle">Rise to the Top! Level Up Your Skills!</p>
+        <p class="subtitle">Rise to the Top by leveling Up Your Skills!</p>
 
 
 
         <div class="challenges">
             <h2>This Week's Challenges</h2>
             <div id="challenges-content"></div>
-            
-            <div style="margin-top: 40px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e); padding: 25px; border-radius: 15px; color: #2d3436;">
-                <h3 style="font-size: 2em; margin-bottom: 15px;">Points System</h3>
-                <p style="font-size: 1.3em; line-height: 1.8;">
-                    Complete challenges to earn points and climb the leaderboard! 
-                </p>
+
+            <div class="points-system" id="points-system">
+                <div class="points-header" id="points-header" role="button" aria-expanded="false" tabindex="0" onclick="togglePoints()" onkeypress="if(event.key==='Enter'||event.key===' ') togglePoints();">
+                    <h3>Points System</h3>
+                    <span class="points-toggle-icon" id="points-toggle">▾</span>
+                </div>
+                <div class="points-content" id="points-content" style="display:none;">
+                    <p>
+                        Complete challenges to earn points and climb the leaderboard! Points are awarded when a challenge is completed and verified by an admin.
+                    </p>
+                    <p>
+                        Rules 1: Submit evidence of completion to the designated channel or upload folder. Deadline is saturday 11:59 PM each week.
+                    </p>
+                    <p>
+                        Rules 2: Each challenge has a base point value. Bonus points may be awarded for creativity, effort, or going above and beyond.
+                    </p>
+                    <p>
+                        Verification: Submissions will be reviewed by admins. Once verified, points will be added to your total on the leaderboard.
+                    </p>
+                    <p class="points-prize">Prize: a surprise box packed with iconic items from the city you’re in.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -329,7 +378,7 @@
         // CHALLENGES DATA - Three challenges per week!
         const challenges = [
             {
-                name: "Take a picture at your favourite study spot and put it here <a href='https:\/\/drive.google.com/drive/folders/1eEA5fY4vmvjRp9mKGDsCFkKS31M4IysJ?usp=drive_link'>here</a>",
+                name: "Take a picture at your favourite study spot and put it <a href='https:\/\/drive.google.com/drive/folders/1eEA5fY4vmvjRp9mKGDsCFkKS31M4IysJ?usp=drive_link'>here</a>",
                 rules: "Take a clear photo at your favourite study spot. Be respectful of privacy and surroundings.",
                 difficulty: "Easy",
                 points: 10,
@@ -423,6 +472,26 @@
                     
                     setTimeout(() => confetti.remove(), 5000);
                 }, i * 200);
+            }
+        }
+
+        // Toggle the points content (collapsible)
+        function togglePoints() {
+            const content = document.getElementById('points-content');
+            const header = document.getElementById('points-header');
+            const icon = document.getElementById('points-toggle');
+            const isExpanded = header.getAttribute('aria-expanded') === 'true';
+
+            if (isExpanded) {
+                content.style.display = 'none';
+                header.setAttribute('aria-expanded', 'false');
+                icon.style.transform = 'rotate(0deg)';
+                icon.textContent = '▾';
+            } else {
+                content.style.display = 'block';
+                header.setAttribute('aria-expanded', 'true');
+                icon.style.transform = 'rotate(180deg)';
+                icon.textContent = '▴';
             }
         }
 
