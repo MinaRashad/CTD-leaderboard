@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: "Comic Sans MS",'Inter', 'Segoe UI', sans-serif;
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
@@ -361,27 +361,9 @@
             <h2><span class="trophy">🏆</span> LEADERBOARD</h2>
             <div id="leaderboard-content"></div>
     </div>
+    <script src="challenges.js"></script>
+    <script src="leaderboard.js"></script>
     <script>
-        // ================================
-        // 📝 UPDATE THIS DATA EASILY! 📝
-        // ================================
-
-        // LEADERBOARD DATA - Just add name and score!
-        const leaderboardData = {
-            "Michelia" : 10
-        };
-
-        // CHALLENGES DATA - Three challenges per week!
-        const challenges = [
-            {
-                name: "Take a picture at your favourite study spot and put it <a href='https:\/\/drive.google.com\/drive\/folders\/1T42ZKVzCZ8faeRbBtDU7en_19PGR54rd?usp=sharing'>here</a>",
-                rules: "Take a clear photo at your favourite study spot. Be respectful of privacy and surroundings.",
-                difficulty: "Easy",
-                points: 10,
-                bonus: "5 points for uniqueness and creativity"
-            }
-        ];
-
         // ================================
         // 🎨 RENDERING CODE (Don't change unless you want to modify styling) 🎨
         // ================================
