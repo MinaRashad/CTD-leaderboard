@@ -1,10 +1,10 @@
 const leaderboardData ={
-    "Michelia": 10,
+    "Michelia": 15,
     "Alexia": 10,
-    "Karla": 10,
+    "Karla": 15,
     "Maria Dumitrescu": 10,
-    "Rim": 10,
-    "Marta": 10,
-    "Daniel-Andrei Zgarta": 10,
-    "Michael Okolo":10
+    "Rim": 15,
+    "Marta": 15,
+    "Daniel-Andrei Zgarta": 15,
+    "Michael Okolo":15
 }
