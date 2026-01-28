@@ -5,9 +5,9 @@ const challenges = [
         "difficulty": "Easy",
         "points": 10,
         "bonus": "5 points for uniqueness and creativity"
-    }
+    },
     {
-        "name" : "Screenshot your coaching session and share it <a href='https://drive.google.com/drive/folders/1T42ZKVzCZ8faeRbBtDU7en_19PGR54rd?usp=sharing'>here</a>",
+        "name" : "Screenshot your coaching session and share it <a href='https://drive.google.com/drive/folders/1bhabZG_mQuc0uTqWRHuJQ0MqwFbK1wer?usp=sharing'>here</a>",
         "rules": "Ensure the screenshot clearly shows the coaching session details. Blur out any sensitive information.",
         "difficulty": "Easy",
         "points": 15,
