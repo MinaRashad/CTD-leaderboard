@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: "Comic Sans MS",'Inter', 'Segoe UI', sans-serif;
+            font-family: "Comic Sans MS";
             background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
@@ -247,6 +247,32 @@
             background: linear-gradient(135deg, #4facfe, #00f2fe);
         }
 
+        .challenge-card.expired {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d) !important;
+            opacity: 0.7;
+            position: relative;
+        }
+
+        .challenge-card.expired::before {
+            content: '⏰ EXPIRED';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(231, 76, 60, 0.9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .challenge-card.expired .challenge-name {
+            text-decoration: line-through;
+            opacity: 0.8;
+        }
+
         .challenge-name {
             font-size: 1.8em;
             font-weight: bold;
@@ -419,8 +445,9 @@
 
             let html = '';
             challenges.forEach((challenge, index) => {
+                const expiredClass = challenge.expired ? 'expired' : '';
                 html += `
-                    <div class="challenge-card">
+                    <div class="challenge-card ${expiredClass}">
                         <div class="challenge-name">Challenge ${index + 1}: ${challenge.name}</div>
                             <div class="challenge-rules">${challenge.rules}</div>
                             <div class="challenge-meta">Difficulty: ${challenge.difficulty} &nbsp; | &nbsp; Bonus: ${challenge.bonus}</div>
