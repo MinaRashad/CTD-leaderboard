@@ -13,6 +13,14 @@ const challenges = [
         difficulty: "Easy",
         points: 15,
         bonus: "5 points for taking the session in an unusual location",
+        expired: true
+    },
+    {
+        name: "Handshake Profile at 100%",
+        rules: "Upload a screenshot of your Handshake profile at 100% completion. <a href='https://drive.google.com/drive/folders/1zKkF8Wy4M5ebXZ8YbRGzNQ8MBI412TVq?usp=sharing' target='_blank'>Upload here</a>.",
+        difficulty: "Easy",
+        points: 15,
+        bonus: "10 extra point if you fill EVERY section, including optional sections",
         expired: false
     }
 ]
