@@ -10,7 +10,7 @@ const challenges = [
     {
         name: "Coaching Session",
         rules: "Screenshot/selfie your coaching session and share it <a href='https://drive.google.com/drive/folders/1bhabZG_mQuc0uTqWRHuJQ0MqwFbK1wer?usp=sharing' target='_blank'>here</a>. Ask for permission first and blur out any sensitive information.",
-        difficulty: "Easy",
+        difficulty: "Medium",
         points: 15,
         bonus: "5 points for taking the session in an unusual location",
         expired: true
