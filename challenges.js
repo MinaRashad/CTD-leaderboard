@@ -21,6 +21,14 @@ const challenges = [
         difficulty: "Easy",
         points: 15,
         bonus: "10 extra point if you fill EVERY section, including optional sections",
+        expired: true
+    },
+    {
+        name: "LinkedIn Posting Challenge",
+        rules: "Post on LinkedIn consistently and submit Google Form links to your posts <a href='https://forms.gle/1BGtvgi1yS4LJekD8' target='_blank'>here</a>.",
+        difficulty: "Medium",
+        points: 10,
+        bonus: "5 points for each additional day you posted",
         expired: false
     }
 ]
