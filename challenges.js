@@ -25,7 +25,7 @@ const challenges = [
     },
     {
         name: "LinkedIn Posting Challenge",
-        rules: "Post on LinkedIn consistently and submit Google Form links to your posts <a href='https://forms.gle/1BGtvgi1yS4LJekD8' target='_blank'>here</a>.",
+        rules: "post on LinkedIn (put a link to your post <a href='https://forms.gle/1BGtvgi1yS4LJekD8' target='_blank'>here</a>).",
         difficulty: "Medium",
         points: 10,
         bonus: "5 points for each additional day you posted",
