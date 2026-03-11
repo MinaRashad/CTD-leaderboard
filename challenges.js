@@ -29,6 +29,14 @@ const challenges = [
         difficulty: "Medium",
         points: 10,
         bonus: "5 points for each additional day you posted",
+        expired: true
+    },
+    {
+        name: "Its getting cold",
+        rules: "Cold message/email a famous professional you admire in your field. Introduce yourself, express genuine interest in their work, and include a specific ask (e.g. a quick call, advice, or mentorship). Put a screenshot <a href='https://drive.google.com/drive/folders/1PCwmlYdFq5Q6T1lW3HgkAr63p3vjkM7k?usp=drive_link'>here</a>",
+        difficulty: "Hard",
+        points: 50,
+        bonus: "100pts if they respond",
         expired: false
     }
 ]

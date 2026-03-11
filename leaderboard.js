@@ -10,5 +10,5 @@ const leaderboardData ={
     "Galiya Askarova": 25,
     "Mina": 30,
     "Pietro": 25,
-    "Emmanuel": 15
+    "Emmanuel": 25
 }
